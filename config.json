@@ -1,0 +1,34 @@
+{
+    "local": {
+        "node" : {
+            "port": 8080
+        },
+        "redis": {
+            "host": "127.0.0.1",
+            "port": "6379"
+        },
+        "secure" : {
+            "/": {
+                "maxHits" : 3,
+                "ttl": 3600, 
+                "ban": 86400
+            }
+        }
+    },
+    "production": {
+        "node" : {
+            "port": 80
+        },
+        "redis": {
+            "host": "",
+            "port": ""
+        },
+        "secure" : {
+            "/": {
+                "maxHits" : 10,
+                "ttl": 3600, 
+                "ban": 86400
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "rate-limiting",
+  "version": "1.0.0",
+  "description": "rate-limiting express middleware",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "npm test"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "middleware",
+    "rate-limiting"
+  ],
+  "author": "medric",
+  "license": "ISC",
+  "dependencies": {
+    "boom": "^4.3.1",
+    "express": "^4.15.2",
+    "redis": "^2.7.1"
+  }
+}
