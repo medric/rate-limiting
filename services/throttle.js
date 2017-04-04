@@ -34,28 +34,30 @@ Throttle.prototype.secure = function(options, next) {
     this.isBanned((timeToBan) => {
         if(!timeToBan) {
             this.reset(time, () => {
-
+                const remainingHits = Math.max(0, (maxHits - hits));
                 client.incr(this.key, (err, hits) => {
                     // User has reached the maximum hits
                     if(hits > maxHits) {
                         this.ban(banTime, hits, () => {
-                            next(secured, banTime);
+                            next(secured, remainingHits, banTime);
                         }); 
                     } else {
                         secured = true;
 
-                        next(secured);    
+                        next(secured, remainingHits);    
                     }
                 });
             });
         } else {    
-            next(secured, timeToBan);
+            next(secured, 0, timeToBan);
         }
     });
 }
 
 /**
- * 
+ * Sets a new throttle key to handle a client hits count
+ * @param {time} key timeout    
+ * @param {next} key callback
  */
 Throttle.prototype.reset = function(time, next) {
     client.exists(this.key, (err, exists) => {
@@ -73,7 +75,10 @@ Throttle.prototype.reset = function(time, next) {
 }
 
 /**
- * 
+ * Bans a client who has processed to many requests
+ * @param {banTime} key time to ban
+ * @param {hits} key number of attended hits
+ * @param {next} key callback
  */
 Throttle.prototype.ban = function(banTime, hits, next) {
     // Set ban key atomically
@@ -81,13 +86,13 @@ Throttle.prototype.ban = function(banTime, hits, next) {
         .del(this.key)
         .setex(this.key + SUFFIX, banTime, hits)
         .exec(() => {
-            console.log('Client gets banned');
             next();
          });
 }
 
 /**
- * 
+ * Check if a client is banned
+ * @param {next} key callback
  */
 Throttle.prototype.isBanned = function(next) {
     client.ttl(this.key + SUFFIX, (err, reply) => {   

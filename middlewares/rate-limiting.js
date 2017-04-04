@@ -11,13 +11,12 @@ module.exports = (req, res, next) => {
     const { secure } = config;
     const { path } = req;
 
-    console.log('ANTI BOTS DETECTION', remoteAddress, path);
-
     const throttle = new Throttle(remoteAddress, path);
     const routeThrottlingConfig = secure && secure[path];
 	
-    throttle.secure(routeThrottlingConfig, function(allowed, timeToBan) {
-        console.log('Allowed: ', allowed);
+    throttle.secure(routeThrottlingConfig, (allowed, remainingHits, timeToBan) => {
+        setXRateHeaders(res, routeThrottlingConfig.maxHits, remainingHits, timeToBan);
+        
         if(!allowed) {
             return res.status(429).send('you have exceeded your request limit');
         }
@@ -25,3 +24,9 @@ module.exports = (req, res, next) => {
         return next();
 	});
 };
+
+function setXRateHeaders(res, rateLimitMax, remaining, timeUntilReset) {
+    res.set('X-Rate-Limit-Limit', rateLimitMax);
+    res.set('X-Rate-Limit-Remaining', remaining);
+    res.set('X-Rate-Limit-Reset', timeUntilReset);
+}
