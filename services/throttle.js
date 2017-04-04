@@ -1,5 +1,5 @@
-var redis = require('redis');
-var client = redis.createClient(); // redis client instance
+const redis = require('redis');
+const client = redis.createClient(); // redis client instance
 
 const PREFIX                = 'secure:';
 const SUFFIX                = ':ban';
