@@ -34,8 +34,9 @@ Throttle.prototype.secure = function(options, next) {
     this.isBanned((timeToBan) => {
         if(!timeToBan) {
             this.reset(time, () => {
-                const remainingHits = Math.max(0, (maxHits - hits));
                 client.incr(this.key, (err, hits) => {
+                    const remainingHits = Math.max(0, (maxHits - hits));
+
                     // User has reached the maximum hits
                     if(hits > maxHits) {
                         this.ban(banTime, hits, () => {

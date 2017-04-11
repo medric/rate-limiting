@@ -7,6 +7,10 @@
     "start": "node app.js",
     "test": "jest"
   },
+  "jest": {
+    "automock": false,
+    "testRegex": "\\.test\\.js$"
+  },
   "keywords": [
     "node",
     "express",

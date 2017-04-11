@@ -11,7 +11,7 @@ const { port } = config.node;
 app.use(rateLimiting);
 
 app.get('/', (req, res) => {
-    res.send('OK');
+    res.send('ok');
 });
 
 app.listen(port, (req, res) => {
