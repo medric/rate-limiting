@@ -3,16 +3,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, Link, hashHistory } from 'react-router'
+import { App } from './components';
 
 // Load main from stylesheets so style is available for the components
 //require('../stylesheets/sass/main.scss');
 
 // Render application to the DOM
 ReactDOM.render(
-    <Router history={hashHistory} >
-        <Route path='/' component={App}>
-            <Route path='tasks' component={TasksList} />
-        </Route>
-    </Router>,
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>,
     document.getElementById('root')
 );

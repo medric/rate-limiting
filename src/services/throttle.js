@@ -99,7 +99,7 @@ Throttle.prototype.ban = function(banTime, hits, next) {
  */
 Throttle.prototype.isBanned = function(next) {
     client.ttl(this.key + SUFFIX, (err, reply) => {   
-        timeToBan = reply;
+        let timeToBan = reply;
 
         if(reply === -2 || reply === 0) {
             timeToBan = false;

@@ -1,6 +1,6 @@
 'use strict';
 const Throttle = require('../services/throttle');
-const config = require('../config.json')[process.env.NODE_ENV || 'local'];
+const config = require('../../config.json')[process.env.NODE_ENV || 'development'];
 
 module.exports = (req, res, next) => {
     const remoteAddress = req.connection.remoteAddress ||

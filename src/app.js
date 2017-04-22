@@ -39,8 +39,10 @@ app.use(bodyParser.urlencoded({  // to support URL-encoded bodies
   extended: true
 }));
 
+app.set('view engine', 'pug');
+
 // Apply middlewares
-app.use(rateLimiting);
+// app.use(rateLimiting);
 
 // Add routes to the middlewares stack
 app.use('/', index);

@@ -1,11 +1,12 @@
 'use strict';
 // @flow
 import React from 'react';
+import {Switch, Route} from 'react-router';
 
 type Props = { tasks: [] };
 type State = { /* */ };
 
-class App extends React.Component {
+/*class App extends React.Component {
   constructor(props: Props) {
     super(props);
   }
@@ -14,7 +15,7 @@ class App extends React.Component {
   }
 
   render () {
-    return (s
+    return (
        <div className="page__container">
            <div id="root" className="page__container-view">
            </div>
@@ -23,4 +24,15 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App;*/
+
+import { routes } from '../../common/routes'
+
+const App = () => (
+  <Switch>
+    {routes.map(route => (
+      <Route {...route}/>
+    ))}
+  </Switch>
+)
+

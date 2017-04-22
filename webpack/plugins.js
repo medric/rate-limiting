@@ -1,12 +1,15 @@
 const webpack = require('webpack');
+const path = require("path");
 
-module.exports = [
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: Infinity,
-        filename: 'vendor.bundle.js'
-    }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-]
+function getPlugins() {
+
+    const plugins = [
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
+    ];
+
+    return plugins;
+}
+
+module.exports = getPlugins;

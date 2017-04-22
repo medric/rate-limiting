@@ -2,7 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const plugins = require('./plugins');
+const getPlugins = require('./plugins');
 const nodeEnv = process.env.NODE_ENV || 'development';
 
 const paths = {
@@ -53,5 +53,5 @@ module.exports = {
             'node_modules'
         ]
     },
-    plugins,
+    plugins: getPlugins()
 }
