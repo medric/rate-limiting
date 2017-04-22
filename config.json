@@ -1,5 +1,5 @@
 {
-    "local": {
+    "development": {
         "node" : {
             "port": 8080
         },

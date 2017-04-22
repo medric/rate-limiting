@@ -1,0 +1,8 @@
+html
+  head
+    title!= title
+  body
+    !=content
+    script.
+      window.__initialState__=!{JSON.stringify(state)};
+    script(src='bundle.js')

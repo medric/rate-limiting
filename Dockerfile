@@ -1,5 +1,5 @@
 FROM node
-WORKDIR /code
+WORKDIR /app
 RUN npm build
 
 CMD ["npm", "start"]
